@@ -1,0 +1,30 @@
+<h1>Temperature data for <%= @city.titleize %>, <%= @state.upcase %> </h1>
+
+<h2>Current Temp: <%= @temperature %> </h2>
+<hr>
+
+<h2>Five Day Forecast</h2>
+<% @forecasts.each do |forecast| %>
+<h4>
+<p><%= forecast["day"] %></p>
+High: <%= forecast["high"] %>,
+Low: <%= forecast["low"] %>,
+Condition: <%= forecast["text"] %>
+</h4>
+<hr>
+<% end %>
+
+<%= form_tag '/', method: :get do %>
+
+  <div>
+    <%= label_tag :city %>
+    <%= text_field_tag :city %>
+  </div>
+
+  <div>
+    <%= label_tag :state %>
+    <%= text_field_tag :state %>
+  </div>
+
+  <%= submit_tag "Get Temp Data" %>
+  <% end %>

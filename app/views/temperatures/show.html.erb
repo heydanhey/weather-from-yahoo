@@ -1,0 +1,29 @@
+<h1>Temperature data for <%= @city %> </h1>
+<h2>Current Temp: <%= @temps["query"]["results"]["channel"]["item"]["condition"]["temp"] %> </h2>
+<hr>
+<h2>Five Day Forecast</h2>
+<% @temps["query"]["results"]["channel"]["item"]["forecast"].each do |x| %>
+<h3>
+<p><%= x["day"] %></p>
+High: <%= x["high"] %>,
+Low: <%= x["low"] %>,
+Condition: <%= x["text"] %>
+</h3>
+<hr>
+<% end %>
+
+<%=form_tag '/temperatures', method: :post do %>
+
+  <div>
+    <%= label_tag :city %>
+    <%= text_field_tag :city %>
+  </div>
+
+  <div>
+    <%= label_tag :state %>
+    <%= text_field_tag :state %>
+  </div>
+
+  <%= submit_tag "Get Temperature Data" %>
+
+  <% end %>
